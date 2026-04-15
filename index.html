@@ -317,6 +317,23 @@ async function initFromHash() {
 }
 }
 
+
+async function handleCallback(){
+  const p=new URLSearchParams(location.search);
+  const code=p.get('code');
+  const err=p.get('error');
+  if(err){setSyncStatus('Error: '+p.get('error_description'),'#ff6584');return false;}
+  if(!code)return false;
+  history.replaceState(null,'',location.pathname);
+  setSyncStatus('Autenticando...','#6c63ff');
+  token=await exchangeCode(code);
+  if(token){
+    const btn=document.getElementById('ms-btn');
+    if(btn){btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#43e97b" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Planner conectado';btn.style.cssText+='background:rgba(67,233,123,.12);color:#43e97b;border-color:rgba(67,233,123,.3)';}
+    return true;
+  }
+  return false;
+}
 async function syncPlanner(){
   document.getElementById('sync-pill').innerHTML='<div class="spinner"></div> Sincronizando...';
   if(token){
