@@ -252,7 +252,7 @@ html,body{height:100%;font-family:'Figtree',sans-serif;background:var(--bg);colo
 <div id="modal-root"></div>
 
 <script>
-const CLIENT_ID = '14d82eec-204b-4c2f-b7e8-296a70dab67e';
+const CLIENT_ID = 'c153ba18-d194-49da-b0d7-55e1439a2bc6';
 const SCOPES = 'Tasks.Read Group.Read.All User.Read';
 const REDIRECT = location.href.split('#')[0];
 
@@ -282,7 +282,7 @@ function mc(m){const ms=[...new Set(SAMPLE.map(p=>p.marca))];return MARCA_COLORS
 function initials(n){return n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
 
 function loginMicrosoft(){
-  const url=`https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(REDIRECT)}&scope=${encodeURIComponent(SCOPES)}&response_mode=fragment`;
+  const url=`https://login.microsoftonline.com/ff21ad01-093b-459d-80c8-0faa85709900/oauth2/v2.0/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(REDIRECT)}&scope=${encodeURIComponent(SCOPES)}&response_mode=fragment`;
   location.href=url;
 }
 
