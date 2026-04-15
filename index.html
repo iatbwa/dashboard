@@ -282,7 +282,7 @@ function mc(m){const ms=[...new Set(SAMPLE.map(p=>p.marca))];return MARCA_COLORS
 function initials(n){return n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
 
 function loginMicrosoft(){
-  const url=`https://login.microsoftonline.com/ff21ad01-093b-459d-80c8-0faa85709900/oauth2/v2.0/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(REDIRECT)}&scope=${encodeURIComponent(SCOPES)}&response_mode=fragment`;
+  const url=`https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(REDIRECT)}&scope=${encodeURIComponent(SCOPES)}&response_mode=fragment`;
   location.href=url;
 }
 
