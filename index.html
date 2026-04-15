@@ -17,6 +17,7 @@
       --ac2: #ff6584;
       --ac3: #43e97b;
       --ac4: #f7971e;
+      --ac5: #00d2ff;
       --t: #e8eaf6;
       --t2: #8892b0;
       --t3: #ccd6f6;
@@ -33,6 +34,7 @@
     }
 
     .lay { display: flex; height: 100vh; }
+
     .sb {
       width: 230px;
       flex-shrink: 0;
@@ -261,6 +263,7 @@
       border: 1px solid var(--br);
       border-radius: 8px;
       overflow: hidden;
+      flex-wrap: wrap;
     }
 
     .vb {
@@ -410,7 +413,7 @@
     .thead,
     .tr {
       display: grid;
-      grid-template-columns: 2.2fr 1fr 1.2fr 1fr 100px 100px 130px 120px 44px;
+      grid-template-columns: 2.2fr 1fr 1.2fr 1fr 110px 110px 130px 120px 44px;
       align-items: center;
       gap: 10px;
       padding: 11px 18px;
@@ -514,7 +517,7 @@
       text-align: right;
     }
 
-    .sema {
+    .sema, .stage-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -667,7 +670,7 @@
       background: var(--sb);
       border: 1px solid var(--br);
       border-radius: 14px;
-      width: 560px;
+      width: 760px;
       max-width: 95vw;
       max-height: 88vh;
       overflow-y: auto;
@@ -696,6 +699,12 @@
     .mgrid {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mgrid3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 12px;
     }
 
@@ -737,15 +746,43 @@
       flex-shrink: 0;
     }
 
-    .mnotes {
+    .notes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .note-row {
       background: var(--card);
       border: 1px solid var(--br);
-      border-radius: 9px;
-      padding: 14px;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .note-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .note-author {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--t3);
+    }
+
+    .note-stamp {
+      font-size: 11px;
+      color: var(--t2);
+    }
+
+    .note-text {
       font-size: 13px;
       color: var(--t2);
-      line-height: 1.7;
-      min-height: 70px;
+      line-height: 1.6;
     }
 
     .mfoot {
@@ -780,16 +817,344 @@
       color: var(--t2);
     }
 
-    @media (max-width: 1200px) {
-      .kgrid, .kan { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .gwrap {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 2rem;
     }
 
-    @media (max-width: 900px) {
+    .gcard {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: 14px;
+      padding: 18px;
+      min-height: 180px;
+    }
+
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+
+    .gtitle {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--t2);
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      margin-bottom: 14px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .metric-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: 14px;
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--ac), var(--ac5));
+    }
+
+    .metric-label {
+      font-size: 11px;
+      color: var(--t2);
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .metric-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--t3);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .metric-sub {
+      font-size: 11px;
+      color: var(--t2);
+    }
+
+    .bars {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 50px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .bar-label {
+      font-size: 12px;
+      color: var(--t3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .bar-track {
+      position: relative;
+      height: 12px;
+      background: rgba(255,255,255,.07);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 20px;
+      background: linear-gradient(90deg, var(--ac), var(--ac5));
+    }
+
+    .bar-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--t2);
+      text-align: right;
+    }
+
+    .donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .donut {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .donut::after {
+      content: '';
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--br);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+
+    .donut-center {
+      position: absolute;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .donut-center .big {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--t3);
+      line-height: 1;
+    }
+
+    .donut-center .small {
+      font-size: 10px;
+      color: var(--t2);
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      margin-top: 4px;
+    }
+
+    .legend {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 240px;
+      flex: 1;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.04);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .legend-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .legend-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .legend-name {
+      font-size: 12px;
+      color: var(--t3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .legend-val {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--t2);
+      white-space: nowrap;
+    }
+
+    .timeline-wrap {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--br);
+      display: grid;
+      grid-template-columns: 220px 110px 110px 1fr;
+      gap: 14px;
+      background: rgba(255,255,255,.03);
+    }
+
+    .timeline-row {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      display: grid;
+      grid-template-columns: 220px 110px 110px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .timeline-row:last-child { border-bottom: none; }
+
+    .tl-name {
+      min-width: 0;
+    }
+
+    .tl-title {
+      font-size: 13px;
+      color: var(--t3);
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 5px;
+    }
+
+    .tl-sub {
+      font-size: 11px;
+      color: var(--t2);
+    }
+
+    .tl-date {
+      font-size: 11px;
+      color: var(--t2);
+      white-space: nowrap;
+    }
+
+    .tl-track {
+      position: relative;
+      height: 16px;
+      background: rgba(255,255,255,.06);
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    .tl-bar {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      border-radius: 30px;
+      background: linear-gradient(90deg, var(--ac), var(--ac5));
+      min-width: 12px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset;
+    }
+
+    .tl-marker {
+      position: absolute;
+      top: 50%;
+      width: 2px;
+      height: 24px;
+      background: rgba(255,255,255,.25);
+      transform: translate(-50%, -50%);
+    }
+
+    .tl-axis {
+      padding: 10px 18px 14px;
+      display: grid;
+      grid-template-columns: 220px 110px 110px 1fr;
+      gap: 14px;
+      border-top: 1px solid rgba(255,255,255,.04);
+    }
+
+    .tl-axis-labels {
+      position: relative;
+      height: 20px;
+    }
+
+    .tl-axis-point {
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      font-size: 10px;
+      color: var(--t2);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1250px) {
+      .kgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .kan { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .span-8, .span-6, .span-4 { grid-column: span 12; }
+      .metric-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 980px) {
       .sb { display: none; }
       .kgrid, .kan { grid-template-columns: 1fr; }
       .thead, .tr { grid-template-columns: 2fr 1fr 1fr 1fr; }
       .thead .th:nth-child(n+5),
       .tr > div:nth-child(n+5) { display: none; }
+      .timeline-head, .timeline-row, .tl-axis {
+        grid-template-columns: 1fr;
+      }
+      .bar-row {
+        grid-template-columns: 1fr;
+      }
+      .mgrid, .mgrid3 {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -911,6 +1276,22 @@
             </svg>
             Kanban
           </button>
+          <button class="vb" id="bg" onclick="sw('g')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="4" y1="20" x2="20" y2="20"></line>
+              <rect x="5" y="11" width="3" height="7"></rect>
+              <rect x="10.5" y="7" width="3" height="11"></rect>
+              <rect x="16" y="4" width="3" height="14"></rect>
+            </svg>
+            Gráficas
+          </button>
+          <button class="vb" id="bl" onclick="sw('l')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="9"></circle>
+              <polyline points="12 7 12 12 16 14"></polyline>
+            </svg>
+            Timeline
+          </button>
         </div>
 
         <button class="tbtn pri" onclick="sync()">
@@ -926,6 +1307,8 @@
         <div class="kgrid" id="kg"></div>
         <div id="vt"></div>
         <div id="vk" style="display:none"></div>
+        <div id="vg" style="display:none"></div>
+        <div id="vl" style="display:none"></div>
       </div>
     </div>
   </div>
@@ -936,7 +1319,6 @@
     const CID = 'c153ba18-d194-49da-b0d7-55e1439a2bc6';
     const TID = 'ff21ad01-093b-459d-80c8-0faa85709900';
     const SC = 'Tasks.Read Group.Read.All User.Read';
-
     const RD = location.origin + location.pathname.replace(/\/$/, '');
 
     let tok = null;
@@ -952,21 +1334,178 @@
     };
 
     const MC = ['#6c63ff', '#ff6584', '#43e97b', '#f7971e', '#00d2ff', '#c239b3', '#38b2ac'];
-    const AC = ['#6c63ff', '#ff6584', '#43e97b', '#f7971e', '#00d2ff', '#c239b3'];
+    const AC = ['#6c63ff', '#ff6584', '#43e97b', '#f7971e', '#00d2ff', '#c239b3', '#38b2ac'];
+    const EC = {
+      'Concepto': '#6c63ff',
+      'Diseño': '#00d2ff',
+      'Animación': '#43e97b',
+      'Cambios': '#f7971e',
+      'VB por Roberto': '#c239b3',
+      'Presentado al cliente': '#ff6584',
+      'Cambios de cliente': '#ff8c42',
+      'Completado': '#50c878'
+    };
+
+    const ETAPAS = [
+      'Concepto',
+      'Diseño',
+      'Animación',
+      'Cambios',
+      'VB por Roberto',
+      'Presentado al cliente',
+      'Cambios de cliente',
+      'Completado'
+    ];
 
     const SP = [
-      { id: 1, nombre: 'Campaña verano 2025', marca: 'Marca A', tipo: 'Marketing', inicio: '2025-05-01', entrega: '2025-07-31', avance: 65, estado: 'verde', involucrados: ['Ana Ruiz', 'Luis Mora', 'Sara Pérez'], notas: 'Aprobada por dirección. Assets en producción.' },
-      { id: 2, nombre: 'Rediseño web corporativo', marca: 'Marca B', tipo: 'Digital', inicio: '2025-03-15', entrega: '2025-06-30', avance: 40, estado: 'amarillo', involucrados: ['Carlos Vidal', 'Mía López'], notas: 'Retrasos en entrega de contenidos.' },
-      { id: 3, nombre: 'Lanzamiento producto X', marca: 'Marca A', tipo: 'Producto', inicio: '2025-01-10', entrega: '2025-04-30', avance: 90, estado: 'verde', involucrados: ['José Alva', 'Ana Ruiz', 'Diego Flores', 'Valeria T.'], notas: 'En recta final. Evento confirmado.' },
-      { id: 4, nombre: 'Plan medios Q3', marca: 'Marca C', tipo: 'Medios', inicio: '2025-06-01', entrega: '2025-09-30', avance: 10, estado: 'gris', involucrados: ['Laura Soto'], notas: 'Pendiente aprobación de presupuesto.' },
-      { id: 5, nombre: 'Activación retail', marca: 'Marca B', tipo: 'Trade', inicio: '2025-04-01', entrega: '2025-05-15', avance: 20, estado: 'rojo', involucrados: ['Pedro Núñez', 'María Castro'], notas: 'Material POP retrasado.' },
-      { id: 6, nombre: 'Campaña redes sociales', marca: 'Marca D', tipo: 'Digital', inicio: '2025-02-01', entrega: '2025-03-31', avance: 100, estado: 'verde', involucrados: ['Sofía Ramos', 'Tomás K.'], notas: 'Completado. KPIs superados en 120%.' },
-      { id: 7, nombre: 'Estrategia marca 2026', marca: 'Marca C', tipo: 'Estrategia', inicio: '2025-05-15', entrega: '2025-08-01', avance: 30, estado: 'amarillo', involucrados: ['Ana Ruiz', 'Luis Mora', 'Pedro Núñez', 'Laura Soto'], notas: 'Workshop pendiente.' },
-      { id: 8, nombre: 'Video institucional', marca: 'Marca A', tipo: 'Producción', inicio: '2025-04-10', entrega: '2025-05-20', avance: 55, estado: 'verde', involucrados: ['Diego Flores'], notas: 'En post-producción.' }
+      {
+        id: 1,
+        nombre: 'Campaña verano 2025',
+        marca: 'Marca A',
+        tipo: 'Marketing',
+        etapa: 'Diseño',
+        fechaPedido: '2025-04-24',
+        inicio: '2025-05-01',
+        entrega: '2025-07-31',
+        avance: 65,
+        estado: 'verde',
+        costo: 4200,
+        involucrados: ['Ana Ruiz', 'Luis Mora', 'Sara Pérez'],
+        historialNotas: [
+          { texto: 'Se aprobó línea visual general para campaña.', responsable: 'Ana Ruiz', fecha: '2025-06-10', hora: '09:15' },
+          { texto: 'Se actualizaron adaptaciones para pauta digital.', responsable: 'Luis Mora', fecha: '2025-06-12', hora: '14:40' },
+          { texto: 'Quedó pendiente ajuste final de key visual.', responsable: 'Sara Pérez', fecha: '2025-06-13', hora: '11:20' }
+        ]
+      },
+      {
+        id: 2,
+        nombre: 'Rediseño web corporativo',
+        marca: 'Marca B',
+        tipo: 'Digital',
+        etapa: 'Cambios',
+        fechaPedido: '2025-03-05',
+        inicio: '2025-03-15',
+        entrega: '2025-06-30',
+        avance: 40,
+        estado: 'amarillo',
+        costo: 7800,
+        involucrados: ['Carlos Vidal', 'Mía López'],
+        historialNotas: [
+          { texto: 'Cliente compartió nueva estructura del home.', responsable: 'Carlos Vidal', fecha: '2025-05-22', hora: '10:05' },
+          { texto: 'Se movió entrega por retraso en contenidos.', responsable: 'Mía López', fecha: '2025-05-24', hora: '16:35' }
+        ]
+      },
+      {
+        id: 3,
+        nombre: 'Lanzamiento producto X',
+        marca: 'Marca A',
+        tipo: 'Producto',
+        etapa: 'Presentado al cliente',
+        fechaPedido: '2025-01-03',
+        inicio: '2025-01-10',
+        entrega: '2025-04-30',
+        avance: 90,
+        estado: 'verde',
+        costo: 9600,
+        involucrados: ['José Alva', 'Ana Ruiz', 'Diego Flores', 'Valeria T.'],
+        historialNotas: [
+          { texto: 'Evento de lanzamiento confirmado.', responsable: 'José Alva', fecha: '2025-04-12', hora: '08:30' },
+          { texto: 'Cliente pidió versión adicional para redes.', responsable: 'Valeria T.', fecha: '2025-04-16', hora: '12:55' },
+          { texto: 'Presentación enviada para VB final.', responsable: 'Ana Ruiz', fecha: '2025-04-18', hora: '17:10' }
+        ]
+      },
+      {
+        id: 4,
+        nombre: 'Plan medios Q3',
+        marca: 'Marca C',
+        tipo: 'Medios',
+        etapa: 'Concepto',
+        fechaPedido: '2025-05-20',
+        inicio: '2025-06-01',
+        entrega: '2025-09-30',
+        avance: 10,
+        estado: 'gris',
+        costo: 3100,
+        involucrados: ['Laura Soto'],
+        historialNotas: [
+          { texto: 'Pendiente aprobación presupuestaria.', responsable: 'Laura Soto', fecha: '2025-06-02', hora: '09:00' }
+        ]
+      },
+      {
+        id: 5,
+        nombre: 'Activación retail',
+        marca: 'Marca B',
+        tipo: 'Trade',
+        etapa: 'Cambios de cliente',
+        fechaPedido: '2025-03-18',
+        inicio: '2025-04-01',
+        entrega: '2025-05-15',
+        avance: 20,
+        estado: 'rojo',
+        costo: 5400,
+        involucrados: ['Pedro Núñez', 'María Castro'],
+        historialNotas: [
+          { texto: 'Material POP no llegó en fecha prevista.', responsable: 'Pedro Núñez', fecha: '2025-04-25', hora: '13:15' },
+          { texto: 'Cliente solicitó cambios de última hora en artes.', responsable: 'María Castro', fecha: '2025-04-28', hora: '15:45' }
+        ]
+      },
+      {
+        id: 6,
+        nombre: 'Campaña redes sociales',
+        marca: 'Marca D',
+        tipo: 'Digital',
+        etapa: 'Completado',
+        fechaPedido: '2025-01-20',
+        inicio: '2025-02-01',
+        entrega: '2025-03-31',
+        avance: 100,
+        estado: 'verde',
+        costo: 2500,
+        involucrados: ['Sofía Ramos', 'Tomás K.'],
+        historialNotas: [
+          { texto: 'Campaña cerrada con KPIs por encima del objetivo.', responsable: 'Sofía Ramos', fecha: '2025-03-31', hora: '18:05' }
+        ]
+      },
+      {
+        id: 7,
+        nombre: 'Estrategia marca 2026',
+        marca: 'Marca C',
+        tipo: 'Estrategia',
+        etapa: 'VB por Roberto',
+        fechaPedido: '2025-05-04',
+        inicio: '2025-05-15',
+        entrega: '2025-08-01',
+        avance: 30,
+        estado: 'amarillo',
+        costo: 6800,
+        involucrados: ['Ana Ruiz', 'Luis Mora', 'Pedro Núñez', 'Laura Soto'],
+        historialNotas: [
+          { texto: 'Workshop interno completado.', responsable: 'Luis Mora', fecha: '2025-06-08', hora: '10:25' },
+          { texto: 'Esperando validación de Roberto.', responsable: 'Ana Ruiz', fecha: '2025-06-10', hora: '11:50' }
+        ]
+      },
+      {
+        id: 8,
+        nombre: 'Video institucional',
+        marca: 'Marca A',
+        tipo: 'Producción',
+        etapa: 'Animación',
+        fechaPedido: '2025-03-28',
+        inicio: '2025-04-10',
+        entrega: '2025-05-20',
+        avance: 55,
+        estado: 'verde',
+        costo: 7200,
+        involucrados: ['Diego Flores', 'Ana Ruiz'],
+        historialNotas: [
+          { texto: 'Edición base aprobada.', responsable: 'Diego Flores', fecha: '2025-05-02', hora: '09:20' },
+          { texto: 'Se inició fase de motion graphics.', responsable: 'Ana Ruiz', fecha: '2025-05-04', hora: '14:10' }
+        ]
+      }
     ];
 
     function mc(m) {
-      const ms = [...new Set(prj.length ? prj.map(p => p.marca) : SP.map(p => p.marca))];
+      const ms = [...new Set((prj.length ? prj : SP).map(p => p.marca))];
       const idx = ms.indexOf(m);
       return MC[(idx >= 0 ? idx : 0) % MC.length];
     }
@@ -1071,7 +1610,7 @@
       const fs = document.getElementById('fs').value;
 
       return prj.filter(p => {
-        if (q && !p.nombre.toLowerCase().includes(q) && !p.marca.toLowerCase().includes(q)) return false;
+        if (q && !p.nombre.toLowerCase().includes(q) && !p.marca.toLowerCase().includes(q) && !p.etapa.toLowerCase().includes(q)) return false;
         if (fm && p.marca !== fm) return false;
         if (fs && p.estado !== fs) return false;
         if (kpi === 'activos' && p.avance >= 100) return false;
@@ -1100,12 +1639,22 @@
               nombre: t.title || 'Sin título',
               marca: 'Plan ' + (t.planId || '').slice(0, 6),
               tipo: 'Tarea',
+              etapa: ETAPAS[i % ETAPAS.length],
+              fechaPedido: t.createdDateTime ? t.createdDateTime.slice(0, 10) : '2025-01-01',
               inicio: t.createdDateTime ? t.createdDateTime.slice(0, 10) : '—',
               entrega: t.dueDateTime ? t.dueDateTime.slice(0, 10) : '—',
               avance: t.percentComplete || 0,
               estado: t.percentComplete >= 100 ? 'verde' : t.percentComplete > 0 ? 'amarillo' : 'gris',
+              costo: 1000 + (i * 650),
               involucrados: Object.keys(t.assignments || {}).slice(0, 4).map((_, j) => `M${j + 1}`),
-              notas: ''
+              historialNotas: [
+                {
+                  texto: 'Registro generado desde sincronización.',
+                  responsable: 'Sistema',
+                  fecha: new Date().toISOString().slice(0, 10),
+                  hora: new Date().toTimeString().slice(0, 5)
+                }
+              ]
             }));
 
             ss(`Sincronizado · ${prj.length} tareas`, '#43e97b');
@@ -1159,10 +1708,17 @@
 
     function sw(v) {
       view = v;
+
       document.getElementById('vt').style.display = v === 't' ? '' : 'none';
       document.getElementById('vk').style.display = v === 'k' ? '' : 'none';
+      document.getElementById('vg').style.display = v === 'g' ? '' : 'none';
+      document.getElementById('vl').style.display = v === 'l' ? '' : 'none';
+
       document.getElementById('bt').classList.toggle('on', v === 't');
       document.getElementById('bk').classList.toggle('on', v === 'k');
+      document.getElementById('bg').classList.toggle('on', v === 'g');
+      document.getElementById('bl').classList.toggle('on', v === 'l');
+
       render();
     }
 
@@ -1189,6 +1745,11 @@
       `;
     }
 
+    function stagePill(etapa) {
+      const c = EC[etapa] || '#8892b0';
+      return `<span class="stage-pill" style="background:${hexToRgba(c, .14)};color:${c}">${etapa}</span>`;
+    }
+
     function pb(n) {
       const c = n >= 100 ? ST.verde : n > 0 ? ST.amarillo : ST.gris;
       return `
@@ -1201,16 +1762,131 @@
       `;
     }
 
+    function currency(v) {
+      return new Intl.NumberFormat('es-HN', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0
+      }).format(v);
+    }
+
+    function parseDate(str) {
+      return new Date(str + 'T00:00:00');
+    }
+
+    function dateDiffDays(a, b) {
+      return Math.round((parseDate(b) - parseDate(a)) / 86400000);
+    }
+
+    function formatShortDate(s) {
+      const d = parseDate(s);
+      return d.toLocaleDateString('es-HN', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    function hexToRgba(hex, alpha = 1) {
+      const clean = hex.replace('#', '');
+      const bigint = parseInt(clean.length === 3
+        ? clean.split('').map(x => x + x).join('')
+        : clean, 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    function getPersonCounts(data) {
+      const map = {};
+      data.forEach(p => p.involucrados.forEach(name => {
+        map[name] = (map[name] || 0) + 1;
+      }));
+      return Object.entries(map)
+        .map(([name, value]) => ({ name, value }))
+        .sort((a, b) => b.value - a.value);
+    }
+
+    function getStageCounts(data) {
+      return ETAPAS.map(name => ({
+        name,
+        value: data.filter(p => p.etapa === name).length,
+        color: EC[name]
+      }));
+    }
+
+    function getBrandCosts(data) {
+      const map = {};
+      data.forEach(p => {
+        map[p.marca] = (map[p.marca] || 0) + p.costo;
+      });
+      return Object.entries(map)
+        .map(([name, value]) => ({ name, value, color: mc(name) }))
+        .sort((a, b) => b.value - a.value);
+    }
+
+    function getProjectCosts(data) {
+      return [...data]
+        .map(p => ({ name: p.nombre, value: p.costo, color: mc(p.marca) }))
+        .sort((a, b) => b.value - a.value);
+    }
+
+    function makeBars(items, format = v => v) {
+      const max = Math.max(...items.map(i => i.value), 1);
+      return `
+        <div class="bars">
+          ${items.map(i => `
+            <div class="bar-row">
+              <div class="bar-label">${i.name}</div>
+              <div class="bar-track">
+                <div class="bar-fill" style="width:${(i.value / max) * 100}%;background:${i.color ? `linear-gradient(90deg, ${i.color}, ${hexToRgba(i.color, .7)})` : 'linear-gradient(90deg, var(--ac), var(--ac5))'}"></div>
+              </div>
+              <div class="bar-num">${format(i.value)}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function makeDonut(items) {
+      const total = items.reduce((a, b) => a + b.value, 0) || 1;
+      let acc = 0;
+      const segments = items.map(it => {
+        const start = (acc / total) * 360;
+        const slice = (it.value / total) * 360;
+        acc += it.value;
+        return `${it.color} ${start}deg ${start + slice}deg`;
+      }).join(', ');
+
+      return `
+        <div class="donut-wrap">
+          <div class="donut" style="background:conic-gradient(${segments})">
+            <div class="donut-center">
+              <div class="big">${items.reduce((a, b) => a + b.value, 0)}</div>
+              <div class="small">proyectos</div>
+            </div>
+          </div>
+          <div class="legend">
+            ${items.map(it => `
+              <div class="legend-item">
+                <div class="legend-left">
+                  <div class="legend-color" style="background:${it.color}"></div>
+                  <div class="legend-name">${it.name}</div>
+                </div>
+                <div class="legend-val">${it.value}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
     function render() {
       const data = gf();
       rKPI();
       document.getElementById('sub').textContent = `${data.length} proyecto${data.length !== 1 ? 's' : ''}`;
 
-      if (view === 't') {
-        rT(data);
-      } else {
-        rK(data);
-      }
+      if (view === 't') rT(data);
+      if (view === 'k') rK(data);
+      if (view === 'g') rG(data);
+      if (view === 'l') rL(data);
     }
 
     function rT(data) {
@@ -1297,7 +1973,7 @@
                     <div class="kname">${p.nombre}</div>
                     <div class="kmeta">
                       <span class="mpill" style="background:${mc(p.marca)}20;color:${mc(p.marca)}">${p.marca}</span>
-                      <span style="font-size:10px;color:var(--t2)">${p.tipo}</span>
+                      ${stagePill(p.etapa)}
                     </div>
                     ${pb(p.avance)}
                     <div class="kft">
@@ -1313,9 +1989,141 @@
       `;
     }
 
+    function rG(data) {
+      if (!data.length) {
+        document.getElementById('vg').innerHTML = '<div class="empty">Sin proyectos con estos filtros</div>';
+        return;
+      }
+
+      const personCounts = getPersonCounts(data);
+      const stageCounts = getStageCounts(data);
+      const brandCosts = getBrandCosts(data);
+      const projectCosts = getProjectCosts(data).slice(0, 8);
+
+      const totalCost = data.reduce((a, p) => a + p.costo, 0);
+      const avgCost = Math.round(totalCost / Math.max(data.length, 1));
+      const uniquePeople = new Set(data.flatMap(p => p.involucrados)).size;
+
+      document.getElementById('vg').innerHTML = `
+        <div class="metric-grid">
+          <div class="metric-card">
+            <div class="metric-label">Costo total</div>
+            <div class="metric-value">${currency(totalCost)}</div>
+            <div class="metric-sub">Acumulado de los proyectos filtrados</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Costo promedio</div>
+            <div class="metric-value">${currency(avgCost)}</div>
+            <div class="metric-sub">Promedio por proyecto</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Personas involucradas</div>
+            <div class="metric-value">${uniquePeople}</div>
+            <div class="metric-sub">Equipo participante en proyectos visibles</div>
+          </div>
+        </div>
+
+        <div class="gwrap">
+          <div class="gcard span-6">
+            <div class="gtitle">Proyectos por persona</div>
+            ${makeBars(personCounts)}
+          </div>
+
+          <div class="gcard span-6">
+            <div class="gtitle">Proyectos por etapa</div>
+            ${makeDonut(stageCounts.filter(x => x.value > 0))}
+          </div>
+
+          <div class="gcard span-6">
+            <div class="gtitle">Costo por marca</div>
+            ${makeBars(brandCosts, v => currency(v))}
+          </div>
+
+          <div class="gcard span-6">
+            <div class="gtitle">Costo por proyecto</div>
+            ${makeBars(projectCosts, v => currency(v))}
+          </div>
+        </div>
+      `;
+    }
+
+    function rL(data) {
+      if (!data.length) {
+        document.getElementById('vl').innerHTML = '<div class="empty">Sin proyectos con estos filtros</div>';
+        return;
+      }
+
+      const items = [...data].sort((a, b) => parseDate(a.fechaPedido) - parseDate(b.fechaPedido));
+      const minDate = items.reduce((min, p) => parseDate(p.fechaPedido) < min ? parseDate(p.fechaPedido) : min, parseDate(items[0].fechaPedido));
+      const maxDate = items.reduce((max, p) => parseDate(p.entrega) > max ? parseDate(p.entrega) : max, parseDate(items[0].entrega));
+      const totalDays = Math.max(1, Math.round((maxDate - minDate) / 86400000));
+
+      const checkpoints = [0, .25, .5, .75, 1].map(v => {
+        const d = new Date(minDate.getTime() + totalDays * v * 86400000);
+        return {
+          label: d.toLocaleDateString('es-HN', { day: '2-digit', month: 'short' }),
+          pos: v * 100
+        };
+      });
+
+      document.getElementById('vl').innerHTML = `
+        <div class="timeline-wrap">
+          <div class="timeline-head">
+            <div class="th">Proyecto</div>
+            <div class="th">Pedido</div>
+            <div class="th">Entrega</div>
+            <div class="th">Timeline</div>
+          </div>
+
+          ${items.map(p => {
+            const startOffset = ((parseDate(p.fechaPedido) - minDate) / 86400000 / totalDays) * 100;
+            const endOffset = ((parseDate(p.entrega) - minDate) / 86400000 / totalDays) * 100;
+            const width = Math.max(2, endOffset - startOffset);
+
+            return `
+              <div class="timeline-row" onclick="openM(${JSON.stringify(p.id)})" style="cursor:pointer">
+                <div class="tl-name">
+                  <div class="tl-title">${p.nombre}</div>
+                  <div class="tl-sub">${p.marca} · ${p.etapa}</div>
+                </div>
+                <div class="tl-date">${formatShortDate(p.fechaPedido)}</div>
+                <div class="tl-date">${formatShortDate(p.entrega)}</div>
+                <div class="tl-track">
+                  <div class="tl-bar" style="left:${startOffset}%; width:${width}%; background:linear-gradient(90deg, ${mc(p.marca)}, ${hexToRgba(mc(p.marca), .7)})"></div>
+                  <div class="tl-marker" style="left:${startOffset}%"></div>
+                  <div class="tl-marker" style="left:${endOffset}%"></div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+
+          <div class="tl-axis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div class="tl-axis-labels">
+              ${checkpoints.map(cp => `
+                <div class="tl-axis-point" style="left:${cp.pos}%">${cp.label}</div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function sortNotes(notes = []) {
+      return [...notes].sort((a, b) => {
+        const da = new Date(`${a.fecha}T${a.hora}:00`);
+        const db = new Date(`${b.fecha}T${b.hora}:00`);
+        return db - da;
+      });
+    }
+
     function openM(id) {
       const p = prj.find(x => String(x.id) === String(id));
       if (!p) return;
+
+      const notes = sortNotes(p.historialNotas || []);
 
       document.getElementById('mr').innerHTML = `
         <div class="ov" onclick="closeM(event)">
@@ -1326,6 +2134,7 @@
                   <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">
                     <span class="mpill" style="background:${mc(p.marca)}20;color:${mc(p.marca)}">${p.marca}</span>
                     <span style="font-size:11px;color:var(--t2);background:rgba(255,255,255,.06);padding:3px 8px;border-radius:20px">${p.tipo}</span>
+                    ${stagePill(p.etapa)}
                   </div>
                   <div style="font-size:19px;font-weight:700;color:var(--t3)">${p.nombre}</div>
                 </div>
@@ -1335,13 +2144,18 @@
               <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap">
                 ${st(p.estado)}
                 ${pb(p.avance)}
+                <span class="mpill" style="background:rgba(255,255,255,.08);color:var(--t3)">${currency(p.costo)}</span>
               </div>
             </div>
 
             <div class="mbody">
               <div class="ms">
                 <div class="mlb">Fechas</div>
-                <div class="mgrid">
+                <div class="mgrid3">
+                  <div class="mf">
+                    <div class="mfl">Fecha de pedido</div>
+                    <div class="mfv">${p.fechaPedido}</div>
+                  </div>
                   <div class="mf">
                     <div class="mfl">Inicio</div>
                     <div class="mfv">${p.inicio}</div>
@@ -1349,6 +2163,24 @@
                   <div class="mf">
                     <div class="mfl">Entrega</div>
                     <div class="mfv" style="color:${p.estado === 'rojo' ? ST.rojo.c : 'var(--t3)'}">${p.entrega}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ms">
+                <div class="mlb">Detalle del proyecto</div>
+                <div class="mgrid3">
+                  <div class="mf">
+                    <div class="mfl">Etapa</div>
+                    <div class="mfv">${p.etapa}</div>
+                  </div>
+                  <div class="mf">
+                    <div class="mfl">Costo</div>
+                    <div class="mfv">${currency(p.costo)}</div>
+                  </div>
+                  <div class="mf">
+                    <div class="mfl">Duración</div>
+                    <div class="mfv">${dateDiffDays(p.fechaPedido, p.entrega)} días</div>
                   </div>
                 </div>
               </div>
@@ -1366,8 +2198,22 @@
               </div>
 
               <div class="ms">
-                <div class="mlb">Notas</div>
-                <div class="mnotes">${p.notas || 'Sin notas disponibles.'}</div>
+                <div class="mlb">Historial de notas (${notes.length})</div>
+                <div class="notes-list">
+                  ${notes.length ? notes.map(n => `
+                    <div class="note-row">
+                      <div class="note-top">
+                        <div class="note-author">${n.responsable}</div>
+                        <div class="note-stamp">${n.fecha} · ${n.hora}</div>
+                      </div>
+                      <div class="note-text">${n.texto}</div>
+                    </div>
+                  `).join('') : `
+                    <div class="note-row">
+                      <div class="note-text">Sin notas disponibles.</div>
+                    </div>
+                  `}
+                </div>
               </div>
             </div>
 
