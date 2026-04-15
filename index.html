@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard</title>
+  <title>PROYECTOS DE AGENCIA — Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,6 +22,9 @@
       --t2: #8892b0;
       --t3: #ccd6f6;
       --br: #2d3561;
+      --ok: #43e97b;
+      --warn: #f7971e;
+      --bad: #ff6584;
     }
 
     html, body {
@@ -36,7 +39,7 @@
     .lay { display: flex; height: 100vh; }
 
     .sb {
-      width: 230px;
+      width: 240px;
       flex-shrink: 0;
       background: var(--sb);
       display: flex;
@@ -143,8 +146,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 11px;
       color: #fff;
       flex-shrink: 0;
     }
@@ -517,7 +518,7 @@
       text-align: right;
     }
 
-    .sema, .stage-pill {
+    .sema, .stage-pill, .upd-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -670,7 +671,7 @@
       background: var(--sb);
       border: 1px solid var(--br);
       border-radius: 14px;
-      width: 760px;
+      width: 780px;
       max-width: 95vw;
       max-height: 88vh;
       overflow-y: auto;
@@ -901,7 +902,7 @@
 
     .bar-row {
       display: grid;
-      grid-template-columns: 160px 1fr 50px;
+      grid-template-columns: 160px 1fr 70px;
       gap: 12px;
       align-items: center;
     }
@@ -1059,10 +1060,7 @@
 
     .timeline-row:last-child { border-bottom: none; }
 
-    .tl-name {
-      min-width: 0;
-    }
-
+    .tl-name { min-width: 0; }
     .tl-title {
       font-size: 13px;
       color: var(--t3);
@@ -1133,11 +1131,157 @@
       white-space: nowrap;
     }
 
+    .notice {
+      background: linear-gradient(135deg, rgba(108,99,255,.15), rgba(0,210,255,.12));
+      border: 1px solid rgba(108,99,255,.22);
+      border-radius: 14px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .notice strong {
+      color: var(--t3);
+      font-size: 13px;
+    }
+
+    .notice span {
+      color: var(--t2);
+      font-size: 12px;
+    }
+
+    .uwrap {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .uhead, .urow {
+      display: grid;
+      grid-template-columns: 220px 1.3fr 120px 150px 44px;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 18px;
+    }
+
+    .uhead {
+      background: rgba(255,255,255,.03);
+      border-bottom: 1px solid var(--br);
+    }
+
+    .urow {
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      cursor: pointer;
+      transition: background .12s;
+    }
+
+    .urow:hover { background: rgba(255,255,255,.03); }
+    .urow:last-child { border-bottom: none; }
+
+    .u-person {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .u-person-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--t3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .u-project {
+      min-width: 0;
+    }
+
+    .u-project-title {
+      font-size: 13px;
+      color: var(--t3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+
+    .u-project-sub {
+      font-size: 11px;
+      color: var(--t2);
+    }
+
+    .u-stamp {
+      font-size: 11px;
+      color: var(--t2);
+      white-space: nowrap;
+    }
+
+    .u-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .u-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: 14px;
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .u-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .u-card.green::before { background: var(--ok); }
+    .u-card.yellow::before { background: var(--warn); }
+    .u-card.red::before { background: var(--bad); }
+
+    .u-val {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .u-card.green .u-val { color: var(--ok); }
+    .u-card.yellow .u-val { color: var(--warn); }
+    .u-card.red .u-val { color: var(--bad); }
+
+    .u-lab {
+      font-size: 11px;
+      color: var(--t2);
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .u-sub {
+      font-size: 11px;
+      color: var(--t2);
+    }
+
     @media (max-width: 1250px) {
       .kgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .kan { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .span-8, .span-6, .span-4 { grid-column: span 12; }
-      .metric-grid { grid-template-columns: 1fr; }
+      .metric-grid, .u-summary { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 980px) {
@@ -1146,7 +1290,7 @@
       .thead, .tr { grid-template-columns: 2fr 1fr 1fr 1fr; }
       .thead .th:nth-child(n+5),
       .tr > div:nth-child(n+5) { display: none; }
-      .timeline-head, .timeline-row, .tl-axis {
+      .timeline-head, .timeline-row, .tl-axis, .uhead, .urow {
         grid-template-columns: 1fr;
       }
       .bar-row {
@@ -1297,6 +1441,15 @@
             </svg>
             Timeline
           </button>
+          <button class="vb" id="bu" onclick="sw('u')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="8" cy="8" r="3"></circle>
+              <circle cx="17" cy="8" r="3"></circle>
+              <path d="M3 19c1.2-3.2 3.5-4.8 5-4.8s3.8 1.6 5 4.8"></path>
+              <path d="M12 19c1-2.7 3-4.2 5-4.2 1.6 0 3.5 1.2 4.5 4.2"></path>
+            </svg>
+            Actualizaciones
+          </button>
         </div>
 
         <button class="tbtn pri" onclick="sync()">
@@ -1314,6 +1467,7 @@
         <div id="vk" style="display:none"></div>
         <div id="vg" style="display:none"></div>
         <div id="vl" style="display:none"></div>
+        <div id="vu" style="display:none"></div>
       </div>
     </div>
   </div>
@@ -1338,7 +1492,13 @@
       gris: { l: 'Sin iniciar', bg: 'rgba(136,146,176,.1)', c: '#8892b0', d: '#8892b0' }
     };
 
-    const MC = ['#6c63ff', '#ff6584', '#43e97b', '#f7971e', '#00d2ff', '#c239b3', '#38b2ac'];
+    const UPD = {
+      verde: { l: 'Actualización completa', bg: 'rgba(67,233,123,.15)', c: '#43e97b', d: '#43e97b' },
+      amarillo: { l: 'En proceso', bg: 'rgba(247,151,30,.15)', c: '#f7971e', d: '#f7971e' },
+      rojo: { l: 'No actualizado', bg: 'rgba(255,101,132,.15)', c: '#ff6584', d: '#ff6584' }
+    };
+
+    const MC = ['#6c63ff', '#ff6584', '#43e97b', '#f7971e', '#00d2ff', '#c239b3', '#38b2ac', '#ff8c42', '#36cfc9', '#a0d911'];
     const AC = ['#6c63ff', '#ff6584', '#43e97b', '#f7971e', '#00d2ff', '#c239b3', '#38b2ac'];
     const EC = {
       'Concepto': '#6c63ff',
@@ -1376,6 +1536,11 @@
         estado: 'verde',
         costo: 4200,
         involucrados: ['Ana Ruiz', 'Luis Mora', 'Sara Pérez'],
+        actualizacionesResponsables: [
+          { responsable: 'Ana Ruiz', estadoActualizacion: 'verde', fechaActualizacion: '2025-06-16', horaActualizacion: '08:20' },
+          { responsable: 'Luis Mora', estadoActualizacion: 'amarillo', fechaActualizacion: '2025-06-16', horaActualizacion: '09:05' },
+          { responsable: 'Sara Pérez', estadoActualizacion: 'rojo', fechaActualizacion: '', horaActualizacion: '' }
+        ],
         historialNotas: [
           { texto: 'Se aprobó línea visual general para campaña.', responsable: 'Ana Ruiz', fecha: '2025-06-10', hora: '09:15' },
           { texto: 'Se actualizaron adaptaciones para pauta digital.', responsable: 'Luis Mora', fecha: '2025-06-12', hora: '14:40' },
@@ -1395,6 +1560,10 @@
         estado: 'amarillo',
         costo: 7800,
         involucrados: ['Carlos Vidal', 'Mía López'],
+        actualizacionesResponsables: [
+          { responsable: 'Carlos Vidal', estadoActualizacion: 'verde', fechaActualizacion: '2025-06-16', horaActualizacion: '08:50' },
+          { responsable: 'Mía López', estadoActualizacion: 'amarillo', fechaActualizacion: '2025-06-16', horaActualizacion: '09:30' }
+        ],
         historialNotas: [
           { texto: 'Cliente compartió nueva estructura del home.', responsable: 'Carlos Vidal', fecha: '2025-05-22', hora: '10:05' },
           { texto: 'Se movió entrega por retraso en contenidos.', responsable: 'Mía López', fecha: '2025-05-24', hora: '16:35' }
@@ -1413,6 +1582,12 @@
         estado: 'verde',
         costo: 9600,
         involucrados: ['José Alva', 'Ana Ruiz', 'Diego Flores', 'Valeria T.'],
+        actualizacionesResponsables: [
+          { responsable: 'José Alva', estadoActualizacion: 'verde', fechaActualizacion: '2025-06-16', horaActualizacion: '07:55' },
+          { responsable: 'Ana Ruiz', estadoActualizacion: 'verde', fechaActualizacion: '2025-06-16', horaActualizacion: '08:05' },
+          { responsable: 'Diego Flores', estadoActualizacion: 'rojo', fechaActualizacion: '', horaActualizacion: '' },
+          { responsable: 'Valeria T.', estadoActualizacion: 'amarillo', fechaActualizacion: '2025-06-16', horaActualizacion: '09:10' }
+        ],
         historialNotas: [
           { texto: 'Evento de lanzamiento confirmado.', responsable: 'José Alva', fecha: '2025-04-12', hora: '08:30' },
           { texto: 'Cliente pidió versión adicional para redes.', responsable: 'Valeria T.', fecha: '2025-04-16', hora: '12:55' },
@@ -1432,6 +1607,9 @@
         estado: 'gris',
         costo: 3100,
         involucrados: ['Laura Soto'],
+        actualizacionesResponsables: [
+          { responsable: 'Laura Soto', estadoActualizacion: 'rojo', fechaActualizacion: '', horaActualizacion: '' }
+        ],
         historialNotas: [
           { texto: 'Pendiente aprobación presupuestaria.', responsable: 'Laura Soto', fecha: '2025-06-02', hora: '09:00' }
         ]
@@ -1449,6 +1627,10 @@
         estado: 'rojo',
         costo: 5400,
         involucrados: ['Pedro Núñez', 'María Castro'],
+        actualizacionesResponsables: [
+          { responsable: 'Pedro Núñez', estadoActualizacion: 'amarillo', fechaActualizacion: '2025-06-16', horaActualizacion: '08:45' },
+          { responsable: 'María Castro', estadoActualizacion: 'rojo', fechaActualizacion: '', horaActualizacion: '' }
+        ],
         historialNotas: [
           { texto: 'Material POP no llegó en fecha prevista.', responsable: 'Pedro Núñez', fecha: '2025-04-25', hora: '13:15' },
           { texto: 'Cliente solicitó cambios de última hora en artes.', responsable: 'María Castro', fecha: '2025-04-28', hora: '15:45' }
@@ -1467,6 +1649,10 @@
         estado: 'verde',
         costo: 2500,
         involucrados: ['Sofía Ramos', 'Tomás K.'],
+        actualizacionesResponsables: [
+          { responsable: 'Sofía Ramos', estadoActualizacion: 'verde', fechaActualizacion: '2025-06-16', horaActualizacion: '08:00' },
+          { responsable: 'Tomás K.', estadoActualizacion: 'verde', fechaActualizacion: '2025-06-16', horaActualizacion: '08:03' }
+        ],
         historialNotas: [
           { texto: 'Campaña cerrada con KPIs por encima del objetivo.', responsable: 'Sofía Ramos', fecha: '2025-03-31', hora: '18:05' }
         ]
@@ -1484,6 +1670,12 @@
         estado: 'amarillo',
         costo: 6800,
         involucrados: ['Ana Ruiz', 'Luis Mora', 'Pedro Núñez', 'Laura Soto'],
+        actualizacionesResponsables: [
+          { responsable: 'Ana Ruiz', estadoActualizacion: 'verde', fechaActualizacion: '2025-06-16', horaActualizacion: '08:18' },
+          { responsable: 'Luis Mora', estadoActualizacion: 'amarillo', fechaActualizacion: '2025-06-16', horaActualizacion: '09:15' },
+          { responsable: 'Pedro Núñez', estadoActualizacion: 'rojo', fechaActualizacion: '', horaActualizacion: '' },
+          { responsable: 'Laura Soto', estadoActualizacion: 'verde', fechaActualizacion: '2025-06-16', horaActualizacion: '08:40' }
+        ],
         historialNotas: [
           { texto: 'Workshop interno completado.', responsable: 'Luis Mora', fecha: '2025-06-08', hora: '10:25' },
           { texto: 'Esperando validación de Roberto.', responsable: 'Ana Ruiz', fecha: '2025-06-10', hora: '11:50' }
@@ -1502,6 +1694,10 @@
         estado: 'verde',
         costo: 7200,
         involucrados: ['Diego Flores', 'Ana Ruiz'],
+        actualizacionesResponsables: [
+          { responsable: 'Diego Flores', estadoActualizacion: 'amarillo', fechaActualizacion: '2025-06-16', horaActualizacion: '09:20' },
+          { responsable: 'Ana Ruiz', estadoActualizacion: 'verde', fechaActualizacion: '2025-06-16', horaActualizacion: '08:12' }
+        ],
         historialNotas: [
           { texto: 'Edición base aprobada.', responsable: 'Diego Flores', fecha: '2025-05-02', hora: '09:20' },
           { texto: 'Se inició fase de motion graphics.', responsable: 'Ana Ruiz', fecha: '2025-05-04', hora: '14:10' }
@@ -1516,7 +1712,13 @@
     }
 
     function ini(n) {
-      return n.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+      return String(n || '')
+        .split(' ')
+        .filter(Boolean)
+        .map(w => w[0])
+        .join('')
+        .slice(0, 2)
+        .toUpperCase() || 'U';
     }
 
     function b64(b) {
@@ -1578,9 +1780,79 @@
       document.getElementById('spill').innerHTML = `<div class="dp" style="background:${c}"></div>${t}`;
     }
 
-    function pf() {
-      const ms = [...new Set(prj.map(p => p.marca))];
+    function currency(v) {
+      return new Intl.NumberFormat('es-HN', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0
+      }).format(v || 0);
+    }
 
+    function parseDate(str) {
+      return new Date(str + 'T00:00:00');
+    }
+
+    function dateDiffDays(a, b) {
+      return Math.round((parseDate(b) - parseDate(a)) / 86400000);
+    }
+
+    function formatShortDate(s) {
+      if (!s) return '—';
+      const d = parseDate(s);
+      return d.toLocaleDateString('es-HN', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    function hexToRgba(hex, alpha = 1) {
+      const clean = hex.replace('#', '');
+      const bigint = parseInt(clean.length === 3 ? clean.split('').map(x => x + x).join('') : clean, 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    function stagePill(etapa) {
+      const c = EC[etapa] || '#8892b0';
+      return `<span class="stage-pill" style="background:${hexToRgba(c, .14)};color:${c}">${etapa}</span>`;
+    }
+
+    function updPill(estado) {
+      const s = UPD[estado] || UPD.rojo;
+      return `<span class="upd-pill" style="background:${s.bg};color:${s.c}"><span style="width:7px;height:7px;border-radius:50%;background:${s.d};display:inline-block"></span>${s.l}</span>`;
+    }
+
+    function st(e) {
+      const s = ST[e] || ST.gris;
+      return `<span class="sema" style="background:${s.bg};color:${s.c}"><span style="width:7px;height:7px;border-radius:50%;background:${s.d};display:inline-block"></span>${s.l}</span>`;
+    }
+
+    function pb(n) {
+      const c = n >= 100 ? ST.verde : n > 0 ? ST.amarillo : ST.gris;
+      return `
+        <div class="pc">
+          <div class="pb">
+            <div class="pf" style="width:${n}%;background:${c.d}"></div>
+          </div>
+          <span class="pt" style="color:${c.c}">${n}%</span>
+        </div>
+      `;
+    }
+
+    function avs(arr) {
+      return `
+        <div class="avs">
+          ${arr.slice(0, 4).map((n, i) => `
+            <div class="av" style="background:${AC[i % AC.length]}30;color:${AC[i % AC.length]}">
+              ${ini(n)}
+            </div>
+          `).join('')}
+          ${arr.length > 4 ? `<div class="av" style="background:rgba(255,255,255,.08);color:var(--t2)">+${arr.length - 4}</div>` : ''}
+        </div>
+      `;
+    }
+
+    function pf() {
+      const ms = [...new Set(prj.map(p => p.marca))].sort((a, b) => a.localeCompare(b));
       document.getElementById('fm').innerHTML =
         '<option value="">Todas las marcas</option>' +
         ms.map(m => `<option value="${m}">${m}</option>`).join('');
@@ -1615,7 +1887,13 @@
       const fs = document.getElementById('fs').value;
 
       return prj.filter(p => {
-        if (q && !p.nombre.toLowerCase().includes(q) && !p.marca.toLowerCase().includes(q) && !p.etapa.toLowerCase().includes(q)) return false;
+        if (q) {
+          const hay = [
+            p.nombre, p.marca, p.etapa, p.tipo,
+            ...(p.involucrados || [])
+          ].join(' ').toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
         if (fm && p.marca !== fm) return false;
         if (fs && p.estado !== fs) return false;
         if (kpi === 'activos' && p.avance >= 100) return false;
@@ -1625,42 +1903,117 @@
       });
     }
 
+    function deriveBrand(task, planMap, bucketMap) {
+      const title = task.title || '';
+      const bucketName = bucketMap[task.bucketId] || '';
+      const planName = planMap[task.planId] || '';
+      const source = [title, bucketName, planName].filter(Boolean).join(' | ');
+
+      const directMatch = source.match(/\[(.*?)\]/);
+      if (directMatch?.[1]) return directMatch[1].trim();
+
+      if (bucketName) return bucketName.trim();
+      if (planName) return planName.trim();
+      return 'Sin marca';
+    }
+
+    async function fetchJson(url, headers = {}) {
+      const r = await fetch(url, { headers });
+      if (!r.ok) throw new Error(`${r.status} ${url}`);
+      return r.json();
+    }
+
+    async function resolvePlannerNames(token, tasks) {
+      const headers = { Authorization: 'Bearer ' + token };
+      const planIds = [...new Set(tasks.map(t => t.planId).filter(Boolean))];
+      const bucketIds = [...new Set(tasks.map(t => t.bucketId).filter(Boolean))];
+      const userIds = [...new Set(tasks.flatMap(t => Object.keys(t.assignments || {})).filter(Boolean))];
+
+      const planMap = {};
+      const bucketMap = {};
+      const userMap = {};
+
+      await Promise.allSettled(planIds.map(async id => {
+        try {
+          const d = await fetchJson(`https://graph.microsoft.com/v1.0/planner/plans/${id}`, headers);
+          planMap[id] = d.title || `Plan ${id.slice(0, 6)}`;
+        } catch {}
+      }));
+
+      await Promise.allSettled(bucketIds.map(async id => {
+        try {
+          const d = await fetchJson(`https://graph.microsoft.com/v1.0/planner/buckets/${id}`, headers);
+          bucketMap[id] = d.name || `Bucket ${id.slice(0, 6)}`;
+        } catch {}
+      }));
+
+      await Promise.allSettled(userIds.map(async id => {
+        try {
+          const d = await fetchJson(`https://graph.microsoft.com/v1.0/users/${id}?$select=displayName,givenName,surname`, headers);
+          userMap[id] = d.displayName || [d.givenName, d.surname].filter(Boolean).join(' ') || `Usuario ${id.slice(0, 4)}`;
+        } catch {
+          userMap[id] = `Usuario ${id.slice(0, 4)}`;
+        }
+      }));
+
+      return { planMap, bucketMap, userMap };
+    }
+
+    function buildMockUpdates(involucrados = [], idx = 0) {
+      const states = ['verde', 'amarillo', 'rojo'];
+      return involucrados.map((name, i) => {
+        const state = states[(idx + i) % states.length];
+        return {
+          responsable: name,
+          estadoActualizacion: state,
+          fechaActualizacion: state === 'rojo' ? '' : '2025-06-16',
+          horaActualizacion: state === 'rojo' ? '' : `${String(8 + ((idx + i) % 3)).padStart(2, '0')}:${String((i * 10) % 60).padStart(2, '0')}`
+        };
+      });
+    }
+
     async function sync() {
       ss('Sincronizando...', '#6c63ff');
 
       if (tok) {
         try {
-          const r = await fetch('https://graph.microsoft.com/v1.0/me/planner/tasks', {
-            headers: { Authorization: 'Bearer ' + tok }
-          });
+          const headers = { Authorization: 'Bearer ' + tok };
+          const d = await fetchJson('https://graph.microsoft.com/v1.0/me/planner/tasks', headers);
+          const tasks = d.value || [];
 
-          if (!r.ok) throw new Error(r.status);
+          if (tasks.length) {
+            const { planMap, bucketMap, userMap } = await resolvePlannerNames(tok, tasks);
 
-          const d = await r.json();
-
-          if (d.value && d.value.length) {
-            prj = d.value.slice(0, 40).map((t, i) => ({
-              id: t.id || i,
-              nombre: t.title || 'Sin título',
-              marca: 'Plan ' + (t.planId || '').slice(0, 6),
-              tipo: 'Tarea',
-              etapa: ETAPAS[i % ETAPAS.length],
-              fechaPedido: t.createdDateTime ? t.createdDateTime.slice(0, 10) : '2025-01-01',
-              inicio: t.createdDateTime ? t.createdDateTime.slice(0, 10) : '—',
-              entrega: t.dueDateTime ? t.dueDateTime.slice(0, 10) : '—',
-              avance: t.percentComplete || 0,
-              estado: t.percentComplete >= 100 ? 'verde' : t.percentComplete > 0 ? 'amarillo' : 'gris',
-              costo: 1000 + (i * 650),
-              involucrados: Object.keys(t.assignments || {}).slice(0, 4).map((_, j) => `M${j + 1}`),
-              historialNotas: [
-                {
-                  texto: 'Registro generado desde sincronización.',
-                  responsable: 'Sistema',
-                  fecha: new Date().toISOString().slice(0, 10),
-                  hora: new Date().toTimeString().slice(0, 5)
-                }
-              ]
-            }));
+            prj = tasks.slice(0, 80).map((t, i) => {
+              const involucrados = Object.keys(t.assignments || {}).slice(0, 8).map(id => userMap[id] || `Usuario ${id.slice(0,4)}`);
+              const marca = deriveBrand(t, planMap, bucketMap);
+              const fechaPedido = t.createdDateTime ? t.createdDateTime.slice(0, 10) : '2025-01-01';
+              const entrega = t.dueDateTime ? t.dueDateTime.slice(0, 10) : fechaPedido;
+              const avance = t.percentComplete || 0;
+              return {
+                id: t.id || i,
+                nombre: t.title || 'Sin título',
+                marca,
+                tipo: bucketMap[t.bucketId] ? 'Tarea / ' + bucketMap[t.bucketId] : 'Tarea',
+                etapa: ETAPAS[i % ETAPAS.length],
+                fechaPedido,
+                inicio: fechaPedido,
+                entrega,
+                avance,
+                estado: avance >= 100 ? 'verde' : avance > 0 ? 'amarillo' : 'gris',
+                costo: 1000 + (i * 650),
+                involucrados: involucrados.length ? involucrados : ['Sin asignar'],
+                actualizacionesResponsables: buildMockUpdates(involucrados.length ? involucrados : ['Sin asignar'], i),
+                historialNotas: [
+                  {
+                    texto: 'Registro sincronizado desde Microsoft Planner.',
+                    responsable: 'Sistema',
+                    fecha: new Date().toISOString().slice(0, 10),
+                    hora: new Date().toTimeString().slice(0, 5)
+                  }
+                ]
+              };
+            });
 
             ss(`Sincronizado · ${prj.length} tareas`, '#43e97b');
           } else {
@@ -1699,9 +2052,7 @@
           <div class="klb">${k.l}</div>
           <div class="kv">${k.v}</div>
           <div class="ksub">${k.s}</div>
-          <div class="kbar">
-            <div class="kfill" style="width:${k.p}%;background:${k.f}"></div>
-          </div>
+          <div class="kbar"><div class="kfill" style="width:${k.p}%;background:${k.f}"></div></div>
         </div>
       `).join('');
     }
@@ -1713,100 +2064,25 @@
 
     function sw(v) {
       view = v;
-
       document.getElementById('vt').style.display = v === 't' ? '' : 'none';
       document.getElementById('vk').style.display = v === 'k' ? '' : 'none';
       document.getElementById('vg').style.display = v === 'g' ? '' : 'none';
       document.getElementById('vl').style.display = v === 'l' ? '' : 'none';
+      document.getElementById('vu').style.display = v === 'u' ? '' : 'none';
 
       document.getElementById('bt').classList.toggle('on', v === 't');
       document.getElementById('bk').classList.toggle('on', v === 'k');
       document.getElementById('bg').classList.toggle('on', v === 'g');
       document.getElementById('bl').classList.toggle('on', v === 'l');
+      document.getElementById('bu').classList.toggle('on', v === 'u');
 
       render();
     }
 
-    function avs(arr) {
-      return `
-        <div class="avs">
-          ${arr.slice(0, 4).map((n, i) => `
-            <div class="av" style="background:${AC[i % AC.length]}30;color:${AC[i % AC.length]}">
-              ${ini(n)}
-            </div>
-          `).join('')}
-          ${arr.length > 4 ? `<div class="av" style="background:rgba(255,255,255,.08);color:var(--t2)">+${arr.length - 4}</div>` : ''}
-        </div>
-      `;
-    }
-
-    function st(e) {
-      const s = ST[e] || ST.gris;
-      return `
-        <span class="sema" style="background:${s.bg};color:${s.c}">
-          <span style="width:7px;height:7px;border-radius:50%;background:${s.d};display:inline-block"></span>
-          ${s.l}
-        </span>
-      `;
-    }
-
-    function stagePill(etapa) {
-      const c = EC[etapa] || '#8892b0';
-      return `<span class="stage-pill" style="background:${hexToRgba(c, .14)};color:${c}">${etapa}</span>`;
-    }
-
-    function pb(n) {
-      const c = n >= 100 ? ST.verde : n > 0 ? ST.amarillo : ST.gris;
-      return `
-        <div class="pc">
-          <div class="pb">
-            <div class="pf" style="width:${n}%;background:${c.d}"></div>
-          </div>
-          <span class="pt" style="color:${c.c}">${n}%</span>
-        </div>
-      `;
-    }
-
-    function currency(v) {
-      return new Intl.NumberFormat('es-HN', {
-        style: 'currency',
-        currency: 'USD',
-        maximumFractionDigits: 0
-      }).format(v);
-    }
-
-    function parseDate(str) {
-      return new Date(str + 'T00:00:00');
-    }
-
-    function dateDiffDays(a, b) {
-      return Math.round((parseDate(b) - parseDate(a)) / 86400000);
-    }
-
-    function formatShortDate(s) {
-      const d = parseDate(s);
-      return d.toLocaleDateString('es-HN', { day: '2-digit', month: 'short', year: 'numeric' });
-    }
-
-    function hexToRgba(hex, alpha = 1) {
-      const clean = hex.replace('#', '');
-      const bigint = parseInt(clean.length === 3
-        ? clean.split('').map(x => x + x).join('')
-        : clean, 16);
-      const r = (bigint >> 16) & 255;
-      const g = (bigint >> 8) & 255;
-      const b = bigint & 255;
-      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-    }
-
     function getPersonCounts(data) {
       const map = {};
-      data.forEach(p => p.involucrados.forEach(name => {
-        map[name] = (map[name] || 0) + 1;
-      }));
-      return Object.entries(map)
-        .map(([name, value]) => ({ name, value }))
-        .sort((a, b) => b.value - a.value);
+      data.forEach(p => (p.involucrados || []).forEach(name => { map[name] = (map[name] || 0) + 1; }));
+      return Object.entries(map).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
     }
 
     function getStageCounts(data) {
@@ -1819,18 +2095,12 @@
 
     function getBrandCosts(data) {
       const map = {};
-      data.forEach(p => {
-        map[p.marca] = (map[p.marca] || 0) + p.costo;
-      });
-      return Object.entries(map)
-        .map(([name, value]) => ({ name, value, color: mc(name) }))
-        .sort((a, b) => b.value - a.value);
+      data.forEach(p => { map[p.marca] = (map[p.marca] || 0) + (p.costo || 0); });
+      return Object.entries(map).map(([name, value]) => ({ name, value, color: mc(name) })).sort((a, b) => b.value - a.value);
     }
 
     function getProjectCosts(data) {
-      return [...data]
-        .map(p => ({ name: p.nombre, value: p.costo, color: mc(p.marca) }))
-        .sort((a, b) => b.value - a.value);
+      return [...data].map(p => ({ name: p.nombre, value: p.costo || 0, color: mc(p.marca) })).sort((a, b) => b.value - a.value);
     }
 
     function makeBars(items, format = v => v) {
@@ -1883,6 +2153,29 @@
       `;
     }
 
+    function getUpdateRows(data) {
+      const rows = [];
+      data.forEach(p => {
+        (p.actualizacionesResponsables || []).forEach(a => {
+          rows.push({
+            projectId: p.id,
+            responsable: a.responsable,
+            proyecto: p.nombre,
+            marca: p.marca,
+            etapa: p.etapa,
+            estadoActualizacion: a.estadoActualizacion,
+            fechaActualizacion: a.fechaActualizacion,
+            horaActualizacion: a.horaActualizacion
+          });
+        });
+      });
+      return rows.sort((a, b) => {
+        const oa = { rojo: 0, amarillo: 1, verde: 2 };
+        if (oa[a.estadoActualizacion] !== oa[b.estadoActualizacion]) return oa[a.estadoActualizacion] - oa[b.estadoActualizacion];
+        return a.responsable.localeCompare(b.responsable);
+      });
+    }
+
     function render() {
       const data = gf();
       rKPI();
@@ -1892,6 +2185,7 @@
       if (view === 'k') rK(data);
       if (view === 'g') rG(data);
       if (view === 'l') rL(data);
+      if (view === 'u') rU(data);
     }
 
     function rT(data) {
@@ -1931,15 +2225,13 @@
               <div class="tr" style="animation-delay:${i * 25}ms" onclick="openM(${JSON.stringify(p.id)})">
                 <div><div class="rn">${p.nombre}</div></div>
                 <div><span style="font-size:11px;color:var(--t2)">${p.tipo}</span></div>
-                <div>${avs(p.involucrados)}</div>
+                <div>${avs(p.involucrados || [])}</div>
                 <div><span class="mpill" style="background:${mc(p.marca)}20;color:${mc(p.marca)}">${p.marca}</span></div>
                 <div class="dc">${p.inicio}</div>
                 <div class="dc" style="color:${p.estado === 'rojo' ? ST.rojo.c : 'var(--t2)'}">${p.entrega}</div>
                 <div>${pb(p.avance)}</div>
                 <div>${st(p.estado)}</div>
-                <div>
-                  <button class="mb" onclick="event.stopPropagation();openM(${JSON.stringify(p.id)})">···</button>
-                </div>
+                <div><button class="mb" onclick="event.stopPropagation();openM(${JSON.stringify(p.id)})">···</button></div>
               </div>
             `).join('')}
           `).join('')}
@@ -1982,7 +2274,7 @@
                     </div>
                     ${pb(p.avance)}
                     <div class="kft">
-                      ${avs(p.involucrados)}
+                      ${avs(p.involucrados || [])}
                       <div class="kdate">${p.entrega}</div>
                     </div>
                   </div>
@@ -2005,9 +2297,9 @@
       const brandCosts = getBrandCosts(data);
       const projectCosts = getProjectCosts(data).slice(0, 8);
 
-      const totalCost = data.reduce((a, p) => a + p.costo, 0);
+      const totalCost = data.reduce((a, p) => a + (p.costo || 0), 0);
       const avgCost = Math.round(totalCost / Math.max(data.length, 1));
-      const uniquePeople = new Set(data.flatMap(p => p.involucrados)).size;
+      const uniquePeople = new Set(data.flatMap(p => p.involucrados || [])).size;
 
       document.getElementById('vg').innerHTML = `
         <div class="metric-grid">
@@ -2065,10 +2357,7 @@
 
       const checkpoints = [0, .25, .5, .75, 1].map(v => {
         const d = new Date(minDate.getTime() + totalDays * v * 86400000);
-        return {
-          label: d.toLocaleDateString('es-HN', { day: '2-digit', month: 'short' }),
-          pos: v * 100
-        };
+        return { label: d.toLocaleDateString('es-HN', { day: '2-digit', month: 'short' }), pos: v * 100 };
       });
 
       document.getElementById('vl').innerHTML = `
@@ -2103,24 +2392,91 @@
           }).join('')}
 
           <div class="tl-axis">
-            <div></div>
-            <div></div>
-            <div></div>
+            <div></div><div></div><div></div>
             <div class="tl-axis-labels">
-              ${checkpoints.map(cp => `
-                <div class="tl-axis-point" style="left:${cp.pos}%">${cp.label}</div>
-              `).join('')}
+              ${checkpoints.map(cp => `<div class="tl-axis-point" style="left:${cp.pos}%">${cp.label}</div>`).join('')}
             </div>
           </div>
         </div>
       `;
     }
 
+    function rU(data) {
+      const rows = getUpdateRows(data);
+
+      if (!rows.length) {
+        document.getElementById('vu').innerHTML = '<div class="empty">Sin responsables para mostrar</div>';
+        return;
+      }
+
+      const green = rows.filter(r => r.estadoActualizacion === 'verde').length;
+      const yellow = rows.filter(r => r.estadoActualizacion === 'amarillo').length;
+      const red = rows.filter(r => r.estadoActualizacion === 'rojo').length;
+
+      document.getElementById('vu').innerHTML = `
+        <div class="notice">
+          <div>
+            <strong>Revisión semanal de responsables</strong><br>
+            <span>Todos los lunes el CEO valida aquí quién actualizó sus pendientes, quién va en proceso y quién aún no reporta avance.</span>
+          </div>
+          <div>${updPill('verde')} ${updPill('amarillo')} ${updPill('rojo')}</div>
+        </div>
+
+        <div class="u-summary">
+          <div class="u-card green">
+            <div class="u-lab">Responsables al día</div>
+            <div class="u-val">${green}</div>
+            <div class="u-sub">Actualización completa</div>
+          </div>
+          <div class="u-card yellow">
+            <div class="u-lab">Responsables en proceso</div>
+            <div class="u-val">${yellow}</div>
+            <div class="u-sub">Actualización parcial o en curso</div>
+          </div>
+          <div class="u-card red">
+            <div class="u-lab">Sin actualizar</div>
+            <div class="u-val">${red}</div>
+            <div class="u-sub">Pendientes de revisión del lunes</div>
+          </div>
+        </div>
+
+        <div class="uwrap">
+          <div class="uhead">
+            <div class="th">Responsable</div>
+            <div class="th">Proyecto</div>
+            <div class="th">Estado</div>
+            <div class="th">Última actualización</div>
+            <div class="th"></div>
+          </div>
+
+          ${rows.map(r => `
+            <div class="urow" onclick="openM(${JSON.stringify(r.projectId)})">
+              <div class="u-person">
+                <div class="av" style="background:${mc(r.marca)}30;color:${mc(r.marca)};margin-left:0">${ini(r.responsable)}</div>
+                <div class="u-person-name">${r.responsable}</div>
+              </div>
+              <div class="u-project">
+                <div class="u-project-title">${r.proyecto}</div>
+                <div class="u-project-sub">${r.marca} · ${r.etapa}</div>
+              </div>
+              <div>${updPill(r.estadoActualizacion)}</div>
+              <div class="u-stamp">${r.fechaActualizacion ? `${r.fechaActualizacion} · ${r.horaActualizacion}` : 'Sin actualización registrada'}</div>
+              <div><button class="mb" onclick="event.stopPropagation();openM(${JSON.stringify(r.projectId)})">···</button></div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
     function sortNotes(notes = []) {
-      return [...notes].sort((a, b) => {
-        const da = new Date(`${a.fecha}T${a.hora}:00`);
-        const db = new Date(`${b.fecha}T${b.hora}:00`);
-        return db - da;
+      return [...notes].sort((a, b) => new Date(`${b.fecha}T${b.hora}:00`) - new Date(`${a.fecha}T${a.hora}:00`));
+    }
+
+    function sortUpdates(updates = []) {
+      return [...updates].sort((a, b) => {
+        const order = { rojo: 0, amarillo: 1, verde: 2 };
+        if (order[a.estadoActualizacion] !== order[b.estadoActualizacion]) return order[a.estadoActualizacion] - order[b.estadoActualizacion];
+        return String(a.responsable).localeCompare(String(b.responsable));
       });
     }
 
@@ -2129,6 +2485,7 @@
       if (!p) return;
 
       const notes = sortNotes(p.historialNotas || []);
+      const updates = sortUpdates(p.actualizacionesResponsables || []);
 
       document.getElementById('mr').innerHTML = `
         <div class="ov" onclick="closeM(event)">
@@ -2191,14 +2548,31 @@
               </div>
 
               <div class="ms">
-                <div class="mlb">Involucrados (${p.involucrados.length})</div>
+                <div class="mlb">Involucrados (${(p.involucrados || []).length})</div>
                 <div class="mavs">
-                  ${p.involucrados.map((n, i) => `
+                  ${(p.involucrados || []).map((n, i) => `
                     <div class="mavchip">
                       <div class="mavdot" style="background:${AC[i % AC.length]}30;color:${AC[i % AC.length]}">${ini(n)}</div>
                       <span style="font-size:12px;color:var(--t3)">${n}</span>
                     </div>
                   `).join('')}
+                </div>
+              </div>
+
+              <div class="ms">
+                <div class="mlb">Estado de actualización de responsables (${updates.length})</div>
+                <div class="notes-list">
+                  ${updates.length ? updates.map(u => `
+                    <div class="note-row">
+                      <div class="note-top">
+                        <div class="note-author">${u.responsable}</div>
+                        <div class="note-stamp">${u.fechaActualizacion ? `${u.fechaActualizacion} · ${u.horaActualizacion}` : 'Sin registro de actualización'}</div>
+                      </div>
+                      <div>${updPill(u.estadoActualizacion)}</div>
+                    </div>
+                  `).join('') : `
+                    <div class="note-row"><div class="note-text">Sin estados de actualización disponibles.</div></div>
+                  `}
                 </div>
               </div>
 
@@ -2214,9 +2588,7 @@
                       <div class="note-text">${n.texto}</div>
                     </div>
                   `).join('') : `
-                    <div class="note-row">
-                      <div class="note-text">Sin notas disponibles.</div>
-                    </div>
+                    <div class="note-row"><div class="note-text">Sin notas disponibles.</div></div>
                   `}
                 </div>
               </div>
@@ -2241,9 +2613,7 @@
       const code = p.get('code');
       const err = p.get('error');
 
-      if (err) {
-        ss(`Error de login: ${err}`, '#ff6584');
-      }
+      if (err) ss(`Error de login: ${err}`, '#ff6584');
 
       if (code) {
         history.replaceState(null, '', location.pathname);
