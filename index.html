@@ -253,50 +253,68 @@ html,body{height:100%;font-family:'Figtree',sans-serif;background:var(--bg);colo
 
 <script>
 const CLIENT_ID = 'c153ba18-d194-49da-b0d7-55e1439a2bc6';
+const TENANT = 'ff21ad01-093b-459d-80c8-0faa85709900';
 const SCOPES = 'Tasks.Read Group.Read.All User.Read';
-const REDIRECT = location.href.split('#')[0];
+const REDIRECT = location.origin + location.pathname;
 
 let token = null, projects = [], currentView = 'tabla', activeKpi = null;
 
-const STATUS = {
-  verde:   {label:'En tiempo',   bg:'rgba(67,233,123,.15)', color:'#43e97b', dot:'#43e97b'},
-  amarillo:{label:'En riesgo',   bg:'rgba(247,151,30,.15)', color:'#f7971e', dot:'#f7971e'},
-  rojo:    {label:'Retrasado',   bg:'rgba(255,101,132,.15)',color:'#ff6584', dot:'#ff6584'},
-  gris:    {label:'Sin iniciar', bg:'rgba(136,146,176,.1)', color:'#8892b0', dot:'#8892b0'},
-};
-const MARCA_COLORS = ['#6c63ff','#ff6584','#43e97b','#f7971e','#00d2ff','#c239b3','#38b2ac'];
-const AV_COLORS   = ['#6c63ff','#ff6584','#43e97b','#f7971e','#00d2ff','#c239b3'];
-
-const SAMPLE = [
-  {id:1,nombre:'Campaña verano 2025',        marca:'Marca A',tipo:'Marketing', inicio:'2025-05-01',entrega:'2025-07-31',avance:65, estado:'verde',   involucrados:['Ana Ruiz','Luis Mora','Sara Pérez'],     notas:'Aprobada por dirección. Assets en producción. Lanzamiento confirmado para junio.'},
-  {id:2,nombre:'Rediseño web corporativo',   marca:'Marca B',tipo:'Digital',   inicio:'2025-03-15',entrega:'2025-06-30',avance:40, estado:'amarillo', involucrados:['Carlos Vidal','Mía López'],              notas:'Retrasos en entrega de contenidos del cliente. Fecha en riesgo.'},
-  {id:3,nombre:'Lanzamiento producto X',     marca:'Marca A',tipo:'Producto',  inicio:'2025-01-10',entrega:'2025-04-30',avance:90, estado:'verde',   involucrados:['José Alva','Ana Ruiz','Diego Flores','Valeria T.'],notas:'En recta final. Evento de lanzamiento confirmado para el 28/04.'},
-  {id:4,nombre:'Plan medios Q3',             marca:'Marca C',tipo:'Medios',    inicio:'2025-06-01',entrega:'2025-09-30',avance:10, estado:'gris',    involucrados:['Laura Soto'],                           notas:'Pendiente aprobación de presupuesto por dirección financiera.'},
-  {id:5,nombre:'Activación retail',          marca:'Marca B',tipo:'Trade',     inicio:'2025-04-01',entrega:'2025-05-15',avance:20, estado:'rojo',    involucrados:['Pedro Núñez','María Castro'],           notas:'Material POP retrasado. Proveedor incumplió fecha de entrega.'},
-  {id:6,nombre:'Campaña redes sociales',     marca:'Marca D',tipo:'Digital',   inicio:'2025-02-01',entrega:'2025-03-31',avance:100,estado:'verde',   involucrados:['Sofía Ramos','Tomás K.'],               notas:'Completado. KPIs superados en 120%. Excelente resultado.'},
-  {id:7,nombre:'Estrategia marca 2026',      marca:'Marca C',tipo:'Estrategia',inicio:'2025-05-15',entrega:'2025-08-01',avance:30, estado:'amarillo',involucrados:['Ana Ruiz','Luis Mora','Pedro Núñez','Laura Soto'],notas:'Workshop pendiente con alta dirección. Agendado para 20/05.'},
-  {id:8,nombre:'Video institucional',        marca:'Marca A',tipo:'Producción',inicio:'2025-04-10',entrega:'2025-05-20',avance:55, estado:'verde',   involucrados:['Diego Flores'],                         notas:'Rodaje completado. En etapa de post-producción y edición final.'},
-];
-
-function mc(m){const ms=[...new Set(SAMPLE.map(p=>p.marca))];return MARCA_COLORS[ms.indexOf(m)%MARCA_COLORS.length];}
-function initials(n){return n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
-
-function loginMicrosoft(){
-  const url=`https://login.microsoftonline.com/ff21ad01-093b-459d-80c8-0faa85709900/oauth2/v2.0/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(REDIRECT)}&scope=${encodeURIComponent(SCOPES)}&response_mode=fragment`;
-  location.href=url;
+function generateCodeVerifier() {
+  const array = new Uint8Array(32);
+  crypto.getRandomValues(array);
+  return btoa(String.fromCharCode(...array)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
 }
 
-function initFromHash(){
-  const h=location.hash;
-  if(h&&h.includes('access_token=')){
-    const p=new URLSearchParams(h.slice(1));
-    token=p.get('access_token');
-    history.replaceState(null,'',location.pathname+location.search);
-    const btn=document.getElementById('ms-btn');
-    btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#43e97b" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Planner conectado';
-    btn.style.cssText+='background:rgba(67,233,123,.12);color:#43e97b;border-color:rgba(67,233,123,.3)';
-    syncPlanner();
+async function generateCodeChallenge(verifier) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(verifier);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  return btoa(String.fromCharCode(...new Uint8Array(digest))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+}
+
+async function loginMicrosoft() {
+  const verifier = generateCodeVerifier();
+  const challenge = await generateCodeChallenge(verifier);
+  sessionStorage.setItem('pkce_verifier', verifier);
+  const url = `https://login.microsoftonline.com/${TENANT}/oauth2/v2.0/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${encodeURIComponent(REDIRECT)}&scope=${encodeURIComponent(SCOPES)}&code_challenge=${challenge}&code_challenge_method=S256&response_mode=query`;
+  location.href = url;
+}
+
+async function exchangeCode(code) {
+  const verifier = sessionStorage.getItem('pkce_verifier');
+  const body = new URLSearchParams({
+    client_id: CLIENT_ID,
+    grant_type: 'authorization_code',
+    code,
+    redirect_uri: REDIRECT,
+    code_verifier: verifier,
+    scope: SCOPES
+  });
+  const r = await fetch(`https://login.microsoftonline.com/${TENANT}/oauth2/v2.0/token`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body
+  });
+  const d = await r.json();
+  return d.access_token || null;
+}
+
+async function initFromHash() {
+  const params = new URLSearchParams(location.search);
+  const code = params.get('code');
+  const error = params.get('error');
+  if (error) { console.error('Auth error:', error, params.get('error_description')); }
+  if (code) {
+    history.replaceState(null, '', location.pathname);
+    token = await exchangeCode(code);
+    if (token) {
+      const btn = document.getElementById('ms-btn');
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#43e97b" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Planner conectado';
+      btn.style.cssText += 'background:rgba(67,233,123,.12);color:#43e97b;border-color:rgba(67,233,123,.3)';
+      await syncPlanner();
+    }
   }
+}
 }
 
 async function syncPlanner(){
@@ -554,8 +572,7 @@ function closeModal(e){
     document.getElementById('modal-root').innerHTML='';
 }
 
-initFromHash();
-syncPlanner();
+initFromHash().then(() => { if(!token) syncPlanner(); });
 </script>
 </body>
 </html>
